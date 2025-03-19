@@ -8,6 +8,7 @@ const amount = document.getElementById("amount");
 const currency = document.getElementById("currency");
 const footer = document.querySelector("main footer");
 const description = document.getElementById("description");
+const result = document.getElementById("result");
 
 amount.addEventListener("input", () => {
   // Não permitimos a digitação de textos no input
@@ -39,6 +40,16 @@ form.onsubmit = (e) => {
 function convertCurrency(amount, price, symbol) {
   try {
     description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`;
+
+    let total = amount * price;
+
+    if (isNaN(total)) {
+      return alert("Por Favor, digite o valor corretamente");
+    }
+
+    total = formatCurrencyBRL(total).replace("R$", "");
+    result.textContent = `${total} Reais`;
+
     footer.classList.add("show-result");
   } catch (error) {
     console.log(error);
@@ -49,10 +60,8 @@ function convertCurrency(amount, price, symbol) {
 
 // Formatar para BRL
 function formatCurrencyBRL(value) {
-  return Number(
-    value.toLocaleString("pt-BR", {
+  return value.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
-    })
-  );
+    });
 }
