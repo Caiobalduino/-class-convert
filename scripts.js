@@ -1,4 +1,6 @@
+const form = document.querySelector("form");
 const amount = document.getElementById("amount");
+const currency = document.getElementById("currency");
 
 amount.addEventListener("input", () => {
   // Não permitimos a digitação de textos no input
@@ -8,3 +10,10 @@ amount.addEventListener("input", () => {
   // g (global) → Faz com que a busca ocorra em toda a string, e não apenas na primeira ocorrência.
   amount.value = amount.value.replace(hasCharactersRegex, ""); // troca qualquer letra por 'nada' -> ""
 });
+
+// Captura o submit do form
+form.onsubmit = (e) => {
+  e.preventDefault();
+
+  
+};
