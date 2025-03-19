@@ -7,6 +7,7 @@ const form = document.querySelector("form");
 const amount = document.getElementById("amount");
 const currency = document.getElementById("currency");
 const footer = document.querySelector("main footer");
+const description = document.getElementById("description");
 
 amount.addEventListener("input", () => {
   // Não permitimos a digitação de textos no input
@@ -37,10 +38,21 @@ form.onsubmit = (e) => {
 // Função -> conversão de moeda
 function convertCurrency(amount, price, symbol) {
   try {
+    description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`;
     footer.classList.add("show-result");
   } catch (error) {
     console.log(error);
     footer.classList.remove("show-result");
     alert("Não foi possível converter.");
   }
+}
+
+// Formatar para BRL
+function formatCurrencyBRL(value) {
+  return Number(
+    value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    })
+  );
 }
